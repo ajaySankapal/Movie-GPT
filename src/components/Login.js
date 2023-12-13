@@ -5,6 +5,7 @@ import { auth } from '../utils/firebase'
 import { useNavigate } from 'react-router-dom'
 import { useDispatch } from 'react-redux'
 import { addUser } from '../utils/authSlice'
+import { BG_URL, USER_AVATAR } from '../utils/constants'
 
 const Login = () => {
     const [isSignIn, setIsSignIn] = useState(true)
@@ -42,11 +43,8 @@ const Login = () => {
         setIsSignIn(!isSignIn)
     }
     const handleSubmit = (e) => {
-        debugger
         e.preventDefault()
         const isValid = validateForm()
-        console.log({ isValid })
-        console.log({ error })
         if (!isValid) return
         if (!isSignIn) {
             createUserWithEmailAndPassword(auth, email, password)
@@ -54,11 +52,10 @@ const Login = () => {
                     // Signed up 
                     const user = userCredential.user;
                     updateProfile(user, {
-                        displayName: fullName, photoURL: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT6dNh-zL2QX7vSRIkt5pRP6MvNo0cHPTUsGw&usqp=CAU"
+                        displayName: fullName, photoURL: USER_AVATAR
                     }).then(() => {
                         const { uid, displayName, email, photoURL } = user;
                         dispatch(addUser({ uid, displayName, email, photoURL }))
-                        navigate('/browse')
                     }).catch((error) => {
                         // An error occurred
                         // ...
@@ -77,7 +74,6 @@ const Login = () => {
                 .then((userCredential) => {
                     // Signed in 
                     const user = userCredential.user;
-                    navigate('/browse')
                 })
                 .catch((error) => {
                     const errorCode = error.code;
@@ -90,12 +86,11 @@ const Login = () => {
 
         }
     }
-    console.log(error, 'ERROR HERE')
     return (
         <div>
             <Header />
             <div className='absolute bg-cover'>
-                <img src="https://assets.nflxext.com/ffe/siteui/vlv3/b4c7f092-0488-48b7-854d-ca055a84fb4f/5b22968d-b94f-44ec-bea3-45dcf457f29e/IN-en-20231204-popsignuptwoweeks-perspective_alpha_website_large.jpg" alt="" />
+                <img src={BG_URL} alt="" />
             </div>
             <form className='w-3/12 absolute bg-black p-12 my-36 mx-auto left-0 right-0 text-white rounded-md bg-opacity-80'>
                 <h1 className='text-3xl py-4 font-bold'>{isSignIn ? "Sign In" : "Sign Up"}</h1>
