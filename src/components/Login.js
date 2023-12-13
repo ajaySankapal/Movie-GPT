@@ -90,9 +90,9 @@ const Login = () => {
         <div>
             <Header />
             <div className='absolute bg-cover'>
-                <img src={BG_URL} alt="" />
+                <img className='h-screen w-screen' src={BG_URL} alt="" />
             </div>
-            <form className='w-3/12 absolute bg-black p-12 my-36 mx-auto left-0 right-0 text-white rounded-md bg-opacity-80'>
+            <form className='w-2/3 md:w-3/12 absolute bg-black p-12 my-24 mx-auto left-0 right-0 text-white rounded-md bg-opacity-80'>
                 <h1 className='text-3xl py-4 font-bold'>{isSignIn ? "Sign In" : "Sign Up"}</h1>
                 {
                     !isSignIn &&

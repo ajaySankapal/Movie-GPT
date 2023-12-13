@@ -35,10 +35,10 @@ const Header = () => {
     }, [])
 
     return (
-        <div className='absolute w-screen px-8 py-2 bg-gradient-to-b from-black z-10 flex justify-between'>
+        <div className='fixed w-screen px-8 py-2 bg-gradient-to-b from-black z-10 flex flex-col md:flex-row justify-between'>
 
-            <img className='w-44' src={APP_LOGO} alt="logo" />
-            {user && <div className='flex p-2 '>
+            <img className='w-44 mx-auto md:mx-0' src={APP_LOGO} alt="logo" />
+            {user && <div className='flex justify-between md:p-2 p-6'>
                 {showGPTSearch && <select className='px-2 py-1 m-2 bg-gray-800 text-white' onChange={(e) => dispatch(changeLanguage(e.target.value))}>
                     {
                         SUPPORTED_LANGUAGES.map(lang =>
@@ -47,8 +47,8 @@ const Header = () => {
                     }
                 </select>}
                 <button className='px-4 py-2 m-2 bg-purple-800 text-white  rounded-md' onClick={() => dispatch(toggleGPTSearch())}>{showGPTSearch ? "Explore" : "GPT Search"}</button>
-                <img className='w-12 h-12' src={user?.photoURL} alt="" />
-                <button className='p-2 text-white' onClick={handleSignOut}>(Sign Out)</button>
+                <img className='hidden md:block w-12 h-12' src={user?.photoURL} alt="" />
+                <button className='p-2 text-white font-bold ' onClick={handleSignOut}>(Sign Out)</button>
             </div>}
         </div>
     )
