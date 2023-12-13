@@ -8,6 +8,7 @@ const moviesSlice = createSlice({
         topRatedMovies: null,
         upcomingMovies: null,
         trendingMovies: null,
+
         trailer: null
     },
     reducers: {
@@ -26,6 +27,7 @@ const moviesSlice = createSlice({
         addTrendingMovies: (state, action) => {
             state.trendingMovies = action.payload
         },
+
         addTrailer: (state, action) => {
             state.trailer = action.payload
         }
